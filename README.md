@@ -1,14 +1,14 @@
-# Ruby Project Template
+# OOP School Library
 
 1 - On Github, on the main page of the Gameportal repository, click the Code button and copy "Clone with HTTPS" by clicking the copy icon.
 In your terminal, enter a git clone and past the link that you copied from the repository, and press the   Enter
-(e.g. git clone https://github.com/shadabwahidullah/Ruby-project-template.git).
+(e.g. git clone https://github.com/shadabwahidullah/OOP-School-Library.git).
 
 - To get a local copy up and running follow these steps.
 
 2 - open your terminal and clone the project running 
 
-`https://github.com/shadabwahidullah/Ruby-project-template.git`
+`https://github.com/shadabwahidullah/OOP-School-Library.git`
 
 3 - install all the gems running
 
