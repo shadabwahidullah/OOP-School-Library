@@ -13,9 +13,9 @@ class Person
   end
 
   def can_use_services?
-    
-     is_of_age? || @parent_permission if true
-
+    if is_of_age? || @parent_permission
+        return true
+    end
   end
 
   private :is_of_age?
