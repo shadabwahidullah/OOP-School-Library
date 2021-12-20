@@ -2,7 +2,7 @@ require './person.rb'
 
 class Student < Person
     def initialize (age, classroom)
-        super()
+        super(age)
         @classroom = classroom
     end
 
