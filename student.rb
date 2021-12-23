@@ -2,7 +2,7 @@ require './person'
 
 class Student < Person
   def initialize(age, classroom, name = 'unknown', parent_permission: true)
-    super(age, name, parent_permission)
+    super(age, name)
     @classroom = classroom
   end
 
@@ -10,3 +10,5 @@ class Student < Person
     "¯\(ツ)/¯"
   end
 end
+
+puts Student.new(18, 15).validate_name
