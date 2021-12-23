@@ -13,4 +13,3 @@ class Teacher < Person
   end
 end
 
-puts Teacher.new(17, 'something', 'wahidullah').validate_name

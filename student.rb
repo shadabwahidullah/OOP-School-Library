@@ -10,5 +10,3 @@ class Student < Person
     "¯\(ツ)/¯"
   end
 end
-
-puts Student.new(18, 15).validate_name
