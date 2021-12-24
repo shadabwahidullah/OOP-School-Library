@@ -1,5 +1,6 @@
 require './student'
 require './teacher'
+require './book'
 
 
 loop do
@@ -14,8 +15,11 @@ loop do
     input = gets.chomp
 
     people = []   
+    books = []
     
     case input
+    when '1'
+    when '2'
     when '3'
         puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
         tmp = gets.chomp
@@ -43,6 +47,17 @@ loop do
             people.push(teacher)
             puts people[0]
         end
+    when '4'
+        print 'Title: '
+        title = gets.chomp
+        print 'Author: '
+        author = gets.chomp
+        book = Book.new(title, author)
+        books.push(book)
+        puts 'Book created successfully'
+        puts books[0].title
+    when '5'
+    when '6'
     end
     
     if input == '7'
