@@ -2,6 +2,9 @@ require './student'
 require './teacher'
 require './book'
 
+people = []   
+books = []
+
 
 loop do
     puts 'Please choose an option by entering a number'
@@ -14,11 +17,11 @@ loop do
     puts '7- exit'
     input = gets.chomp
 
-    people = []   
-    books = []
-    
     case input
     when '1'
+        puts 'input is 1'
+        books.each {|book| puts "Title: #{book.title}, Author: #{book.author}"}
+        puts
     when '2'
     when '3'
         puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
