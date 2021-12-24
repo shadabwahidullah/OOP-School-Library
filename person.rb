@@ -7,9 +7,10 @@ class Person
     @age = age
     @parent_permission = parent_permission
     @corrector = Corrector.new
+    @rentals = []
   end
   attr_accessor :name, :age
-  attr_reader :id
+  attr_reader :id, :rentals
 
   def can_use_services?
     true if of_age? || @parent_permission
@@ -17,6 +18,11 @@ class Person
 
   def validate_name
     @name = @corrector.correct_name(@name)
+  end
+
+  def add_rental(rental)
+    @rentals.push(rental)
+    rental.person = self
   end
 
   private
