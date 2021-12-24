@@ -24,6 +24,7 @@ class Person
     @rentals.push(rental)
     rental.person = self
   end
+
   private
 
   def of_age?
