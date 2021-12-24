@@ -1,9 +1,11 @@
 require './student'
 require './teacher'
 require './book'
+require './rental'
 
 people = []   
 books = []
+rentals = []
 
 
 loop do
@@ -59,7 +61,21 @@ loop do
         puts 'Book created successfully'
         puts books[0].title
     when '5'
-      
+        puts 'Select a book from the following list'
+        books.each_with_index {|book, idx| puts "[#{idx}]Title: #{book.title}, Author: #{book.author}"}
+        bookIdx = gets.chomp.to_i
+        puts
+        puts 'Select a person from the following list'
+        people.each_with_index{|person, idx| puts "[#{idx}] (#{}) Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"}
+        personIdx = gets.chomp.to_i
+        puts
+        print 'Date: '
+        date = gets.chomp
+        rental = Rental.new(date, books[bookIdx], people[personIdx])
+        rentals.push(rental)
+        puts 'Rental created successfully'
+        puts 
+
     when '6'
     end
     
