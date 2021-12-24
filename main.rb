@@ -33,9 +33,8 @@ loop do
             name = gets.chomp
             puts 'Has parent permission?[Y/N]'
             parent_permission = gets.chomp
-            student = Student.new(age, name, parent_permission: parent_permission.upcase =='Y' ? true : false)
+            student = Student.new(age, 12, name, parent_permission: parent_permission.upcase =='Y' ? true : false)
             puts 'Person Created successfully'
-            puts person.name
             people.push(student)
             puts people[0]
         elsif (tmp == '2')
@@ -60,6 +59,7 @@ loop do
         puts 'Book created successfully'
         puts books[0].title
     when '5'
+      
     when '6'
     end
     
