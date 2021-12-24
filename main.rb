@@ -21,10 +21,10 @@ loop do
 
     case input
     when '1'
-        puts 'input is 1'
         books.each {|book| puts "Title: #{book.title}, Author: #{book.author}"}
         puts
     when '2'
+        people.each{|person| puts "Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"}
     when '3'
         puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
         tmp = gets.chomp
