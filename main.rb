@@ -29,27 +29,27 @@ loop do
         puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
         tmp = gets.chomp
         if(tmp == '1')
-            puts 'age'
+            print 'Age: '
             age = gets.chomp
-            puts 'name'
+            print 'Name: '
             name = gets.chomp
-            puts 'Has parent permission?[Y/N]'
+            print 'Has parent permission?[Y/N] '
             parent_permission = gets.chomp
             student = Student.new(age, 12, name, parent_permission: parent_permission.upcase =='Y' ? true : false)
             puts 'Person Created successfully'
             people.push(student)
-            puts people[0]
+            puts 
         elsif (tmp == '2')
-            puts 'age'
+            print 'Age: '
             age = gets.chomp
-            puts 'name'
+            print 'Name: '
             name = gets.chomp
-            puts 'Specialization'
+            print 'Specialization: '
             specialization = gets.chomp
             teacher = Teacher.new(age, specialization, name)
             puts 'Person created successfully'
             people.push(teacher)
-            puts people[0]
+            puts 
         end
     when '4'
         print 'Title: '
@@ -59,7 +59,7 @@ loop do
         book = Book.new(title, author)
         books.push(book)
         puts 'Book created successfully'
-        puts books[0].title
+        puts 
     when '5'
         puts 'Select a book from the following list'
         books.each_with_index {|book, idx| puts "[#{idx}] Title: #{book.title}, Author: #{book.author}"}
@@ -86,7 +86,6 @@ loop do
         end
         puts
     end
-    
     if input == '7'
         break
     end
