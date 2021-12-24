@@ -62,7 +62,7 @@ loop do
         puts books[0].title
     when '5'
         puts 'Select a book from the following list'
-        books.each_with_index {|book, idx| puts "[#{idx}]Title: #{book.title}, Author: #{book.author}"}
+        books.each_with_index {|book, idx| puts "[#{idx}] Title: #{book.title}, Author: #{book.author}"}
         bookIdx = gets.chomp.to_i
         puts
         puts 'Select a person from the following list'
@@ -75,8 +75,16 @@ loop do
         rentals.push(rental)
         puts 'Rental created successfully'
         puts 
-
     when '6'
+        print 'ID of person: '
+        idOfperson = gets.chomp.to_i
+        puts 'Rentals:'
+        rentals.each do |rental|
+            if (rental.person.id == idOfperson)
+                puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author}"
+            end
+        end
+        puts
     end
     
     if input == '7'
