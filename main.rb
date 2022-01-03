@@ -17,16 +17,55 @@ class ListClass
     puts
   end
 
+  def list_people
+    @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+    puts
+  end
 
+  def list_rentals_for_person
+    print 'ID of person: '
+    id_of_person = gets.chomp.to_i
+    puts 'Rentals:'
+    @rentals.each do |rent|
+      puts "Date: #{rent.date}, Book #{rent.book.title} by #{rent.book.author}" if rent.person.id == id_of_person
+    end
+    puts
+  end
 end
-
 
 class CreateClass
   def initialize(listHandler)
     @listHandler = listHandler
   end
 
-  
+  def create_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    b = Book.new(title, author)
+    @listHandler.books.push(b)
+    puts 'Book created successfully'
+    puts
+  end
+
+  def create_rental
+    puts 'Select a book from the following list'
+    @listHandler.books.each_with_index { |b, idx| puts "[#{idx}] Title: #{b.title}, Author: #{b.author}" }
+    book_idx = gets.chomp.to_i
+    puts 'Select a person from the following list'
+    @listHandler.people.each_with_index do |person, idx|
+      puts "[#{idx}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
+    person_idx = gets.chomp.to_i
+    print 'Date: '
+    date = gets.chomp
+    rental = Rental.new(date, @books[book_idx], @people[person_idx])
+    @rentals.push(rental)
+    puts 'Rental created successfully'
+    puts
+  end
+
   def create_student
     print 'Age: '
     age = gets.chomp
@@ -40,7 +79,6 @@ class CreateClass
     puts
   end
 
-
   def create_teacher
     print 'Age: '
     age = gets.chomp
@@ -53,7 +91,6 @@ class CreateClass
     @listHandler.people.push(teacher)
     puts
   end
-
 
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
@@ -76,15 +113,11 @@ class CreateClass
   end
 end
 
-
-
 class Main
   def initialize
     @listHandler = ListClass.new
     @createHandler = CreateClass.new(@listHandler)
   end
-
-  
 
   def print_guide
     puts 'Please choose an option by entering a number'
@@ -96,53 +129,6 @@ class Main
     puts '6- List all rentals for a given person id '
     puts '7- exit'
   end
-
-  def list_people
-    @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
-    puts
-  end
-
-  
-
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-    b = Book.new(title, author)
-    @books.push(b)
-    puts 'Book created successfully'
-    puts
-  end
-
-  def create_rental
-    puts 'Select a book from the following list'
-    @books.each_with_index { |b, idx| puts "[#{idx}] Title: #{b.title}, Author: #{b.author}" }
-    book_idx = gets.chomp.to_i
-    puts 'Select a person from the following list'
-    @people.each_with_index do |person, idx|
-      puts "[#{idx}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-    person_idx = gets.chomp.to_i
-    print 'Date: '
-    date = gets.chomp
-    rental = Rental.new(date, @books[book_idx], @people[person_idx])
-    @rentals.push(rental)
-    puts 'Rental created successfully'
-    puts
-  end
-
-  def list_rentals_for_person
-    print 'ID of person: '
-    id_of_person = gets.chomp.to_i
-    puts 'Rentals:'
-    @rentals.each do |rent|
-      puts "Date: #{rent.date}, Book #{rent.book.title} by #{rent.book.author}" if rent.person.id == id_of_person
-    end
-    puts
-  end
-
-  
 
   def all_prints
     loop do
