@@ -17,6 +17,7 @@ class ListClass
     puts
   end
 
+
   def list_people
     @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
     puts
@@ -31,7 +32,9 @@ class ListClass
     end
     puts
   end
+
 end
+
 
 class CreateClass
   def initialize(listHandler)
@@ -61,11 +64,12 @@ class CreateClass
     print 'Date: '
     date = gets.chomp
     rental = Rental.new(date, @books[book_idx], @people[person_idx])
-    @rentals.push(rental)
+    @listHandler.rentals.push(rental)
     puts 'Rental created successfully'
     puts
   end
 
+  
   def create_student
     print 'Age: '
     age = gets.chomp
@@ -79,6 +83,7 @@ class CreateClass
     puts
   end
 
+
   def create_teacher
     print 'Age: '
     age = gets.chomp
@@ -91,6 +96,7 @@ class CreateClass
     @listHandler.people.push(teacher)
     puts
   end
+
 
   def create_person
     puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
@@ -113,11 +119,14 @@ class CreateClass
   end
 end
 
+
+
 class Main
   def initialize
     @listHandler = ListClass.new
     @createHandler = CreateClass.new(@listHandler)
   end
+
 
   def print_guide
     puts 'Please choose an option by entering a number'
@@ -129,6 +138,7 @@ class Main
     puts '6- List all rentals for a given person id '
     puts '7- exit'
   end
+  
 
   def all_prints
     loop do
@@ -142,9 +152,9 @@ class Main
       when '3', '4'
         @createHandler.create_book_or_person(input)
       when '5'
-        create_rental
+        @createHandler.create_rental
       when '6'
-        list_rentals_for_person
+        @createHandler.list_rentals_for_person
       when '7'
         break
       end
