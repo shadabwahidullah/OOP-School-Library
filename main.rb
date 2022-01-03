@@ -3,12 +3,88 @@ require './teacher'
 require './book'
 require './rental'
 
-class Main
+class ListClass
   def initialize
     @people = []
     @books = []
     @rentals = []
   end
+
+  attr_accessor :people, :books, :rentals
+
+  def list_books
+    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    puts
+  end
+
+
+end
+
+
+class CreateClass
+  def initialize(listHandler)
+    @listHandler = listHandler
+  end
+
+  
+  def create_student
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Has parent permission?[Y/N] '
+    parent_permission = gets.chomp
+    student = Student.new(age, 12, name, parent_permission: parent_permission == 'y')
+    puts 'Person Created successfully'
+    @listHandler.people.push(student)
+    puts
+  end
+
+
+  def create_teacher
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Specialization: '
+    specialization = gets.chomp
+    teacher = Teacher.new(age, specialization, name)
+    puts 'Person created successfully'
+    @listHandler.people.push(teacher)
+    puts
+  end
+
+
+  def create_person
+    puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
+    tmp = gets.chomp
+    case tmp
+    when '1'
+      self.create_student
+    when '2'
+      self.create_teacher
+    end
+  end
+
+  def create_book_or_person(input)
+    case input
+    when '3'
+      self.create_person
+    when '4'
+      self.create_book
+    end
+  end
+end
+
+
+
+class Main
+  def initialize
+    @listHandler = ListClass.new
+    @createHandler = CreateClass.new(@listHandler)
+  end
+
+  
 
   def print_guide
     puts 'Please choose an option by entering a number'
@@ -21,52 +97,12 @@ class Main
     puts '7- exit'
   end
 
-  def list_books
-    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    puts
-  end
-
   def list_people
     @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
     puts
   end
 
-  def create_student
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission?[Y/N] '
-    parent_permission = gets.chomp
-    student = Student.new(age, 12, name, parent_permission: parent_permission == 'y')
-    puts 'Person Created successfully'
-    @people.push(student)
-    puts
-  end
-
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-    teacher = Teacher.new(age, specialization, name)
-    puts 'Person created successfully'
-    @people.push(teacher)
-    puts
-  end
-
-  def create_person
-    puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
-    tmp = gets.chomp
-    case tmp
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    end
-  end
+  
 
   def create_book
     print 'Title: '
@@ -106,14 +142,7 @@ class Main
     puts
   end
 
-  def create_book_or_person(input)
-    case input
-    when '3'
-      create_person
-    when '4'
-      create_book
-    end
-  end
+  
 
   def all_prints
     loop do
@@ -121,11 +150,11 @@ class Main
       input = gets.chomp
       case input
       when '1'
-        list_books
+        @listHandler.list_books
       when '2'
-        list_people
+        @listHandler.list_people
       when '3', '4'
-        create_book_or_person(input)
+        @createHandler.create_book_or_person(input)
       when '5'
         create_rental
       when '6'
