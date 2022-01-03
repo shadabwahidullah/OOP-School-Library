@@ -63,7 +63,7 @@ class CreateClass
     person_idx = gets.chomp.to_i
     print 'Date: '
     date = gets.chomp
-    rental = Rental.new(date, @books[book_idx], @people[person_idx])
+    rental = Rental.new(date, @listHandler.books[book_idx], @listHandler.people[person_idx])
     @listHandler.rentals.push(rental)
     puts 'Rental created successfully'
     puts
@@ -154,7 +154,7 @@ class Main
       when '5'
         @createHandler.create_rental
       when '6'
-        @createHandler.list_rentals_for_person
+        @listHandler.list_rentals_for_person
       when '7'
         break
       end
