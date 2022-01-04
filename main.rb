@@ -14,34 +14,59 @@ class Main
   def print_guide
     puts 'Please choose an option by entering a number'
     puts '1- List all books'
-    puts '2- List all people'
+    puts '2- Create a book'
     puts '3- Create a person'
-    puts '4- Create a book'
+    puts '4- List all people'
     puts '5- Create a rental'
     puts '6- List all rentals for a given person id '
     puts '7- exit'
+  end
+
+  def people_caller(input)
+    case input
+    when 3
+      @person_logic.create_person
+    when 4
+      @person_logic.list_people
+    end
+  end
+
+  def book_caller(input)
+    case input
+    when 1
+      @book_logic.list_books
+    when 2
+      @book_logic.create_book
+    end
+  end
+
+  def rental_caller(input)
+    case input
+    when 5
+      @rental_logic.create_rental
+    when 6
+      @rental_logic.list_rentals_for_person
+    end
+  end
+
+  def logic_caller(input)
+    case input
+    when 1..2
+      book_caller(input)
+    when 3..4
+      people_caller(input)
+    when 5..6
+      rental_caller(input)
+    end
   end
 
   def all_prints
     loop do
       print_guide
       input = gets.chomp
-      case input
-      when '1'
-        @book_logic.list_books
-      when '2'
-        @person_logic.list_people
-      when '3'
-        @person_logic.create_person
-      when '4'
-        @book_logic.create_book
-      when '5'
-        @rental_logic.create_rental
-      when '6'
-        @rental_logic.list_rentals_for_person
-      when '7'
-        break
-      end
+      break if input == '7'
+
+      logic_caller(input.to_i)
     end
   end
 end
