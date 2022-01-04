@@ -12,22 +12,38 @@ class PersonLogic
     puts
   end
 
-  def create_person
+  def user_input
     puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
     tmp = gets.chomp
     print 'Age: '
     age = gets.chomp
     print 'Name: '
     name = gets.chomp
-    case tmp
+    differentiator([tmp, age, name])
+  end
+
+  def differentiator(input_array)
+    case input_array[0]
     when '1'
       print 'Has Parent Permission Y/N '
       has_parent_permission = gets.chomp
-      object = Student.new(age, 12, name, parent_permission: has_parent_permission)
+      input_array.push(has_parent_permission)
+      input_array
     when '2'
       print 'Specialization: '
       specialization = gets.chomp
-      object = Teacher.new(age, specialization, name)
+      input_array.push(specialization)
+      input_array
+    end
+  end
+
+  def create_person
+    input_array = user_input
+    case input_array[0]
+    when '1'
+      object = Student.new(input_array[1], 12, input_array[2], parent_permission: input_array[3])
+    when '2'
+      object = Teacher.new(input_array[1], input_array[3], input_array[2])
     end
     @list_handler.people.push(object)
     puts 'Person created successfully'
