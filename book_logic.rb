@@ -1,4 +1,4 @@
-require_relative "./book"
+require_relative './book'
 
 class BookLogic
   def initialize(list_handler)

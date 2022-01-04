@@ -1,4 +1,4 @@
-require_relative "./rental"
+require_relative './rental'
 
 class RentalLogic
   def initialize(list_handler)
@@ -15,23 +15,20 @@ class RentalLogic
     puts
   end
 
-
   def select_rental(iterable, item)
-    puts 'Select a #{item} from the following list:'
+    puts "Select a #{item} from the following list:"
     case item
     when 'book'
-    iterable.each_with_index { |b, idx| puts "[#{idx}] Title: #{b.title}, Author: #{b.author}" }
+      iterable.each_with_index { |b, idx| puts "[#{idx}] Title: #{b.title}, Author: #{b.author}" }
     when 'person'
-    iterable.each_with_index do |person, idx|
-      puts "[#{idx}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
+      iterable.each_with_index do |person, idx|
+        puts "[#{idx}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+      end
     end
     print 'Select a number: '
     input = gets.chomp.to_i
     iterable[input]
   end
-
-
 
   def create_rental
     book = select_rental(@list_handler.books, 'book')
@@ -44,4 +41,3 @@ class RentalLogic
     puts
   end
 end
-

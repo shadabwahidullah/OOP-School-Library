@@ -1,11 +1,12 @@
-require_relative "./list_middleware"
-require_relative "./student"
-require_relative "./teacher"
+require_relative './list_middleware'
+require_relative './student'
+require_relative './teacher'
 
 class PersonLogic
   def initialize(list_handler)
     @list_handler = list_handler
   end
+
   def list_people
     @list_handler.people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
     puts
@@ -20,7 +21,7 @@ class PersonLogic
     name = gets.chomp
     case tmp
     when '1'
-      print 'Has Parent Permission Y/N'
+      print 'Has Parent Permission Y/N '
       has_parent_permission = gets.chomp
       object = Student.new(age, 12, name, parent_permission: has_parent_permission)
     when '2'
