@@ -1,5 +1,5 @@
 class ListClass
-  def initialize(books_handler, rentals_handler, people_handler)
+  def initialize
     @books = []
     @rentals = []
     @people = []

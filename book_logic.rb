@@ -1,3 +1,5 @@
+require_relative "./book"
+
 class BookLogic
   def initialize(list_handler)
     @list_handler = list_handler

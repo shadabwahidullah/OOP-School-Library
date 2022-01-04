@@ -1,4 +1,6 @@
 require_relative "./list_middleware"
+require_relative "./student"
+require_relative "./teacher"
 
 class PersonLogic
   def initialize(list_handler)

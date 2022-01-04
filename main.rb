@@ -1,12 +1,14 @@
-require './student'
-require './teacher'
-require './book'
-require './rental'
+require './list_middleware'
+require './person_logic'
+require './book_logic'
+require './rental_logic'
 
 class Main
   def initialize
     @list_handler = ListClass.new
-    @create_handler = CreateClass.new(@list_handler)
+    @person_logic = PersonLogic.new(@list_handler)
+    @book_logic = BookLogic.new(@list_handler)
+    @rental_logic = RentalLogic.new(@list_handler)
   end
 
   def print_guide
@@ -26,15 +28,17 @@ class Main
       input = gets.chomp
       case input
       when '1'
-        @list_handler.list_books
+        @book_logic.list_books
       when '2'
-        @list_handler.list_people
-      when '3', '4'
-        @create_handler.create_book_or_person(input)
+        @person_logic.list_people
+      when '3'
+        @person_logic.create_person
+      when '4'
+        @book_logic.create_book
       when '5'
-        @create_handler.create_rental
+        @rental_logic.create_rental
       when '6'
-        @list_handler.list_rentals_for_person
+        @rental_logic.list_rentals_for_person
       when '7'
         break
       end

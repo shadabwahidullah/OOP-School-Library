@@ -1,4 +1,4 @@
-require_relative "./list_middleware"
+require_relative "./rental"
 
 class RentalLogic
   def initialize(list_handler)
@@ -38,8 +38,8 @@ class RentalLogic
     person = select_rental(@list_handler.people, 'person')
     print 'Date: '
     date = gets.chomp
-    rental = Rental.new(date, book, people)
-    @rentals.push(rental)
+    rental = Rental.new(date, book, person)
+    @list_handler.rentals.push(rental)
     puts 'Rental created successfully'
     puts
   end
