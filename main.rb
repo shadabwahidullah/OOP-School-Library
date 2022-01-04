@@ -3,23 +3,6 @@ require './teacher'
 require './book'
 require './rental'
 
-class CreateClass
-  def initialize(list_handler)
-    @list_handler = list_handler
-  end
-
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-    b = Book.new(title, author)
-    @list_handler.books.push(b)
-    puts 'Book created successfully'
-    puts
-  end
-end
-
 class Main
   def initialize
     @list_handler = ListClass.new
