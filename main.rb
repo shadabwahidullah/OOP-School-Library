@@ -67,7 +67,7 @@ class Main
       print_guide
       input = gets.chomp
       if input == '7'
-        @file_manager.save_all_data(@list_handler.get_data_object)
+        @file_manager.save_all_data(@list_handler.data_to_object)
         break
       end
       logic_caller(input.to_i)
