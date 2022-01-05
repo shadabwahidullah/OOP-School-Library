@@ -1,117 +1,62 @@
-require './student'
-require './teacher'
-require './book'
-require './rental'
+require './list_middleware'
+require './person_logic'
+require './book_logic'
+require './rental_logic'
 
 class Main
   def initialize
-    @people = []
-    @books = []
-    @rentals = []
+    @list_handler = ListClass.new
+    @person_logic = PersonLogic.new(@list_handler)
+    @book_logic = BookLogic.new(@list_handler)
+    @rental_logic = RentalLogic.new(@list_handler)
   end
 
   def print_guide
     puts 'Please choose an option by entering a number'
     puts '1- List all books'
-    puts '2- List all people'
+    puts '2- Create a book'
     puts '3- Create a person'
-    puts '4- Create a book'
+    puts '4- List all people'
     puts '5- Create a rental'
     puts '6- List all rentals for a given person id '
     puts '7- exit'
   end
 
-  def list_books
-    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    puts
-  end
-
-  def list_people
-    @people.each { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
-    puts
-  end
-
-  def create_student
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    print 'Has parent permission?[Y/N] '
-    parent_permission = gets.chomp
-    student = Student.new(age, 12, name, parent_permission: parent_permission == 'y')
-    puts 'Person Created successfully'
-    @people.push(student)
-    puts
-  end
-
-  def create_teacher
-    print 'Age: '
-    age = gets.chomp
-    print 'Name: '
-    name = gets.chomp
-    print 'Specialization: '
-    specialization = gets.chomp
-    teacher = Teacher.new(age, specialization, name)
-    puts 'Person created successfully'
-    @people.push(teacher)
-    puts
-  end
-
-  def create_person
-    puts 'Do you want to create a student (1) or a teacher (2)? [input_number]'
-    tmp = gets.chomp
-    case tmp
-    when '1'
-      create_student
-    when '2'
-      create_teacher
-    end
-  end
-
-  def create_book
-    print 'Title: '
-    title = gets.chomp
-    print 'Author: '
-    author = gets.chomp
-    b = Book.new(title, author)
-    @books.push(b)
-    puts 'Book created successfully'
-    puts
-  end
-
-  def create_rental
-    puts 'Select a book from the following list'
-    @books.each_with_index { |b, idx| puts "[#{idx}] Title: #{b.title}, Author: #{b.author}" }
-    book_idx = gets.chomp.to_i
-    puts 'Select a person from the following list'
-    @people.each_with_index do |person, idx|
-      puts "[#{idx}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-    end
-    person_idx = gets.chomp.to_i
-    print 'Date: '
-    date = gets.chomp
-    rental = Rental.new(date, @books[book_idx], @people[person_idx])
-    @rentals.push(rental)
-    puts 'Rental created successfully'
-    puts
-  end
-
-  def list_rentals_for_person
-    print 'ID of person: '
-    id_of_person = gets.chomp.to_i
-    puts 'Rentals:'
-    @rentals.each do |rent|
-      puts "Date: #{rent.date}, Book #{rent.book.title} by #{rent.book.author}" if rent.person.id == id_of_person
-    end
-    puts
-  end
-
-  def create_book_or_person(input)
+  def people_caller(input)
     case input
-    when '3'
-      create_person
-    when '4'
-      create_book
+    when 3
+      @person_logic.create_person
+    when 4
+      @person_logic.list_people
+    end
+  end
+
+  def book_caller(input)
+    case input
+    when 1
+      @book_logic.list_books
+    when 2
+      @book_logic.create_book
+    end
+  end
+
+  def rental_caller(input)
+    case input
+    when 5
+      @rental_logic.create_rental
+    when 6
+      @rental_logic.list_rentals_for_person
+    end
+  end
+
+  def logic_caller(input)
+    case input
+    when 1..2
+      book_caller(input)
+    when 3..4
+      people_caller(input)
+    when 5..6
+      rental_caller(input)
     end
   end
 
@@ -119,20 +64,9 @@ class Main
     loop do
       print_guide
       input = gets.chomp
-      case input
-      when '1'
-        list_books
-      when '2'
-        list_people
-      when '3', '4'
-        create_book_or_person(input)
-      when '5'
-        create_rental
-      when '6'
-        list_rentals_for_person
-      when '7'
-        break
-      end
+      break if input == '7'
+
+      logic_caller(input.to_i)
     end
   end
 end
