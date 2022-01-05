@@ -23,7 +23,9 @@ class FileManager
   end
 
   def save_file(file_name, data)
-    File.open(file_name, 'w') { |file| file.write(data.to_json) }
+    file = File.open(file_name, 'w')
+    file.write(data.to_json)
+    file.close
   end
 
   def load_all_data
