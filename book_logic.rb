@@ -15,7 +15,7 @@ class BookLogic
     title = gets.chomp
     print 'Author: '
     author = gets.chomp
-    b = Book.new(title, author)
+    b = Book.new(title: title, author: author)
     @list_handler.books.push(b)
     puts 'Book created successfully'
     puts
