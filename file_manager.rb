@@ -2,6 +2,7 @@ require 'json'
 
 class FileManager
   def initialize
+    @ignored_keys = ['corrector']
     @paths = {
       people: './people.json',
       books: './books.json',
@@ -10,41 +11,54 @@ class FileManager
   end
 
   def data_loader(file_name)
-    if (File.exists?(file_name))
-      file = File.open(file_name, "r")
+    if File.exist?(file_name)
+      file = File.open(file_name, 'r')
       file_data = file.read
       file.close
-      return JSON.parse(file_data, {symbolize_names: true})
+      JSON.parse(file_data, { symbolize_names: true })
     else
       save_file(file_name, [])
-      return []
+      []
     end
   end
 
   def save_file(file_name, data)
-    File.open(file_name, "w") { |file| file.write(data.to_json) }
+    File.open(file_name, 'w') { |file| file.write(data.to_json) }
   end
 
   def load_all_data
     output = {}
-    for key, value in @paths
+    @paths.each do |key, value|
       output[key] = data_loader(value)
     end
-    return output
+    output
   end
 
   def save_all_data(data)
-    for key, value in data
-      save_file(@paths[key], object_to_json(value))
+    data.each do |key, value|
+      save_file(@paths[key], get_objects_from_array(value))
     end
   end
 
-  def object_to_json(object)
-    variables = object.instance_variables
+  def get_objects_from_array(array)
+    array.each_with_index do |item, index|
+      array[index] = object_to_json(item)
+    end
+    array
+  end
+
+  def object_to_json(item)
+    variables = item.instance_variables
     output = {}
-    for variable in variables
-      output[variable.to_s.sub!("@","")] = object.instance_variable_get(variable)
+    output['identifier'] = item.class.to_s
+    variables.each do |variable|
+      unless @ignored_keys.include?(variable.to_s.delete('@'))
+        output[variable.to_s.sub!('@', '')] = item.instance_variable_get(variable.to_s)
+      end
+      if variable.to_s == '@book' || variable.to_s == '@person'
+        output[variable.to_s.sub!('@', '')] = object_to_json(item.instance_variable_get(variable.to_s))
+      end
     end
+    output
   end
-
 end
