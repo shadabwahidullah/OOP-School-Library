@@ -5,7 +5,7 @@ describe Teacher do
     @t = Teacher.new age: 12, specialization: double('something')
   end
 
-  context 'Teacher instanitiation' do
+  context 'Teacher instantiation' do
     it '#new' do
       expect(@t).to be_a Teacher
     end
