@@ -7,7 +7,7 @@ describe Rental do
     @t = Rental.new date: 2020 / 12 / 12, book: double('somebook'), person: double('someperson')
   end
 
-  context 'Rental instanitiation' do
+  context 'Rental instantiation' do
     it '#new' do
       expect(@t).to be_a Rental
     end
