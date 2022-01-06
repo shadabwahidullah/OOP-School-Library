@@ -4,4 +4,4 @@ git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 gem 'rubocop', '>= 1.0', '< 2.0'
 
-gem "rspec", "~> 3.10"
+gem 'rspec', '~> 3.10'
