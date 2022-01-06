@@ -6,7 +6,7 @@ describe Student do
     @s = Student.new age: 12, classroom: double('classroom')
   end
 
-  context 'Student instanitiation' do
+  context 'Student instantiation' do
     it '#new' do
       expect(@s).to be_a Student
     end
