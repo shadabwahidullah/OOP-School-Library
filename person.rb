@@ -13,7 +13,11 @@ class Person
   attr_reader :id, :rentals
 
   def can_use_services?
-    true if of_age? || @parent_permission
+    if of_age? || @parent_permission
+      true
+    else
+      false
+    end
   end
 
   def validate_name
