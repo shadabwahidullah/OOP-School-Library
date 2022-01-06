@@ -35,7 +35,7 @@ class RentalLogic
     person = select_rental(@list_handler.people, 'person')
     print 'Date: '
     date = gets.chomp
-    rental = Rental.new(date, book, person)
+    rental = Rental.new(date: date, book: book, person: person)
     @list_handler.rentals.push(rental)
     puts 'Rental created successfully'
     puts

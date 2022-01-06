@@ -41,9 +41,9 @@ class PersonLogic
     input_array = user_input
     case input_array[0]
     when '1'
-      object = Student.new(input_array[1], 12, input_array[2], parent_permission: input_array[3])
+      object = Student.new(age: input_array[1], classroom: 12, name: input_array[2], parent_permission: input_array[3])
     when '2'
-      object = Teacher.new(input_array[1], input_array[3], input_array[2])
+      object = Teacher.new(age: input_array[1], specialization: input_array[3], name: input_array[2])
     end
     @list_handler.people.push(object)
     puts 'Person created successfully'

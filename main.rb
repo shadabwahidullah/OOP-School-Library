@@ -2,10 +2,12 @@ require './list_middleware'
 require './person_logic'
 require './book_logic'
 require './rental_logic'
+require './file_manager'
 
 class Main
   def initialize
-    @list_handler = ListClass.new
+    @file_manager = FileManager.new
+    @list_handler = ListClass.new(@file_manager.load_all_data)
     @person_logic = PersonLogic.new(@list_handler)
     @book_logic = BookLogic.new(@list_handler)
     @rental_logic = RentalLogic.new(@list_handler)
@@ -64,8 +66,10 @@ class Main
     loop do
       print_guide
       input = gets.chomp
-      break if input == '7'
-
+      if input == '7'
+        @file_manager.save_all_data(@list_handler.data_to_object)
+        break
+      end
       logic_caller(input.to_i)
     end
   end
