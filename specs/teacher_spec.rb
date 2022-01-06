@@ -10,4 +10,10 @@ describe Teacher do
       expect(@t).to be_a Teacher
     end
   end
+
+  context 'Test Methods' do
+    it 'Check can_use_services?' do
+      expect(@t.can_use_services?).to be true 
+    end
+  end
 end
