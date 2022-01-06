@@ -13,7 +13,7 @@ describe Teacher do
 
   context 'Test Methods' do
     it 'Check can_use_services?' do
-      expect(@t.can_use_services?).to be true 
+      expect(@t.can_use_services?).to be true
     end
   end
 end

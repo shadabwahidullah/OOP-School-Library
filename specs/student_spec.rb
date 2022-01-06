@@ -18,9 +18,9 @@ describe Student do
       expect(output).to eq "¯\(ツ)/¯"
     end
     it 'Set Classroom method' do
-      mock_classroom = Classroom.new "Mock Classroom"
+      mock_classroom = Classroom.new 'Mock Classroom'
       @s.classroom = mock_classroom
-      expect(@s.classroom.label).to eq "Mock Classroom"
+      expect(@s.classroom.label).to eq 'Mock Classroom'
     end
   end
 end

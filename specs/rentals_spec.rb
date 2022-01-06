@@ -24,5 +24,4 @@ describe Rental do
       expect(@t.person).to be_a Person
     end
   end
-
 end
