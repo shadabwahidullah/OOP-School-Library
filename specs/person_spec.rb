@@ -6,7 +6,7 @@ describe Person do
     @p = Person.new 12
   end
 
-  context 'Person instanitiation' do
+  context 'Person instantiation' do
     it '#new' do
       expect(@p).to be_a Person
     end
