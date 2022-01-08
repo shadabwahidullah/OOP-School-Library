@@ -16,7 +16,7 @@ In your terminal, enter a git clone and past the link that you copied from the r
 
 4 - to run the file  use
 
-`Ruby morse.rb`
+`Ruby main.rb`
 
 ## Authors
 
